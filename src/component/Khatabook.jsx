@@ -251,10 +251,14 @@ const Khatabook = () => {
   // search customer
 
   async function searchcustomer(e) {
+    console.log("search got called");
+    let current = e.target.value;
+    console.log(current);
     setinput({
       ...input,
       search: e.target.value,
     });
+
     const res = await fetch(
       "https://khatabook-backend2.onrender.com/getcustomer"
     );
@@ -265,14 +269,14 @@ const Khatabook = () => {
     });
     setbkddata(searcheddata);
     console.log(searcheddata);
-    if (searcheddata.length === 0) {
+    if (searcheddata.length == 0) {
       swal("no customer found");
     } else if (e.target.value == "") {
       console.log("i m null");
       mycustomer(input.myfilter);
     }
-    console.log("im filterder", searcheddata);
-    console.log("i m bkd data", bkddata);
+    //console.log("im filterder", searcheddata);
+   // console.log("i m bkd data", bkddata);
   }
 
   return (
