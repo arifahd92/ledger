@@ -265,7 +265,7 @@ const Khatabook = () => {
     const data = await res.json();
 
     let searcheddata = data.filter((elm) => {
-      return elm.name.toLowerCase().includes(e.target.value);
+      return elm.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
     setbkddata(searcheddata);
     console.log(searcheddata);
@@ -276,7 +276,7 @@ const Khatabook = () => {
       mycustomer(input.myfilter);
     }
     //console.log("im filterder", searcheddata);
-   // console.log("i m bkd data", bkddata);
+    // console.log("i m bkd data", bkddata);
   }
 
   return (
