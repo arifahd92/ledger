@@ -286,17 +286,29 @@ const Khatabook = () => {
       </div>
       {dataFlag && (
         <div className="flexcontainer">
-          <h1 className="head"> Fetching data...</h1>
+          <img
+            className="image"
+            src="https://gifdb.com/images/high/buffering-animated-text-icon-loading-u1h739who8u5mtw3.webp"
+            alt="loading..."
+          />
         </div>
       )}
       {saveFlag && (
         <div className="flexcontainer">
-          <h1 className="head"> Saving data...</h1>
+          <img
+            className="image"
+            src="https://www.implantswiss.com/img/upl/systems/updating.gif"
+            alt="Saving..."
+          />
         </div>
       )}
       {editFlag && (
         <div className="flexcontainer">
-          <h1 className="head"> Updating...</h1>
+          <img
+            className="image"
+            src="https://www.implantswiss.com/img/upl/systems/updating.gif"
+            alt="Updating..."
+          />
         </div>
       )}
       {input.addcustomer ? (

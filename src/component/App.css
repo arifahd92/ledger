@@ -186,6 +186,15 @@ p {
   width: 100px;
   background-color: salmon;
 }
+.image{
+  position: fixed;
+  top:300px
+  
+}
+.image{
+  height:250px;
+  width: 250px;
+}
 @media screen and (max-width: 800px) and (min-width: 400px) {
   .flexcontainerbtn {
     flex-wrap: nowrap;
