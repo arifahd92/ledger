@@ -6,6 +6,7 @@ const Khatabook = () => {
   let [dataFlag, setDataFlag] = useState(false);
   const [saveFlag, setSaveFlag] = useState(false);
   const [editFlag, setEditFlag] = useState(false);
+  const [deleteFlag, setDeleteFlag] = useState(false);
   let [bkddata, setbkddata] = useState({});
   // let [sort , setsort]=useState("date")
   let [input, setinput] = useState({
@@ -96,13 +97,18 @@ const Khatabook = () => {
       swal("Could not fetch data! try again...");
       setTimeout(() => {
         mycustomer();
-      }, 1000);
+      }, 5000);
     }
   }
 
   async function savedata() {
     try {
-      if (input.val && input.amountval && input.lastdate && input.phoneno) {
+      if (
+        input.val &&
+        input.amountval &&
+        input.lastdate &&
+        input.phoneno.length >= 10
+      ) {
         setSaveFlag(true);
         const res = await fetch(
           "https://khatabook-backend2.onrender.com/savedata",
@@ -138,7 +144,9 @@ const Khatabook = () => {
           });
         }
       } else {
-        swal("ensure name, amount, phone and pay date  fields are filled");
+        swal(
+          "All fields are mandatory and phone number should be atleast ten digit"
+        );
       }
       return;
     } catch (err) {
@@ -148,6 +156,7 @@ const Khatabook = () => {
   }
   function deletedata(ind) {
     // let cnf = window.confirm("are you sure")
+
     swal("Are you sure? this user's record will be deleted permanently", {
       dangerMode: true,
       buttons: true,
@@ -158,26 +167,35 @@ const Khatabook = () => {
       }
     });
     async function deleteitem(ind) {
-      const res = await fetch(
-        "https://khatabook-backend2.onrender.com/delete",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ind }),
-        }
-      );
-      let data = await res.json(); // res.json wala ayrga
-      console.log(data);
-      // setsearch("")
-      setinput({
-        ...input,
-        search: " ",
-      });
-      // handlesort(data,sort)
-      // setbkddata(data)
-      mycustomer(input.myfilter);
+      try {
+        setDeleteFlag(true);
+
+        const res = await fetch(
+          "https://khatabook-backend2.onrender.com/delete",
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ind }),
+          }
+        );
+        let data = await res.json(); // res.json wala ayrga
+        setDeleteFlag(false);
+
+        console.log(data);
+        // setsearch("")
+        setinput({
+          ...input,
+          search: " ",
+        });
+        // handlesort(data,sort)
+        // setbkddata(data)
+        mycustomer(input.myfilter);
+      } catch (error) {
+        setDeleteFlag(false);
+        swal("Failed! try again...");
+      }
     }
   }
 
@@ -311,6 +329,15 @@ const Khatabook = () => {
           />
         </div>
       )}
+      {deleteFlag && (
+        <div className="flexcontainer">
+          <img
+            className="image"
+            src="https://www.implantswiss.com/img/upl/systems/updating.gif"
+            alt="Updating..."
+          />
+        </div>
+      )}
       {input.addcustomer ? (
         <>
           <div className="flexcontainer">
@@ -352,6 +379,7 @@ const Khatabook = () => {
               name="phoneno"
               value={input.phoneno}
               onChange={(e) => handleChange(e)}
+              minLength={10}
             />
             <pre> </pre>
             <input
