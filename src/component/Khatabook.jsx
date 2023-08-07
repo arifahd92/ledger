@@ -518,10 +518,10 @@ const Khatabook = () => {
             })}
           {!dataFlag && bkddata.length == 0 && (
             <div className="flexcontainer ">
-              <h2 className="datanNotification">
+              <h4 className="datanNotification">
                 You have not added any customer, you can add customers using
                 plus icon{" "}
-              </h2>
+              </h4>
             </div>
           )}
         </>
