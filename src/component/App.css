@@ -20,7 +20,16 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-
+.datanNotification{
+  height: 200px;
+  width: 90vw;
+  display: flex;
+  margin-top: 100px;
+  background-color: rgb(246, 221, 196);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
 .btn,
 button {
   background-color: rgb(118, 118, 160);

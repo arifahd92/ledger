@@ -145,7 +145,7 @@ const Khatabook = () => {
         }
       } else {
         swal(
-          "All fields are mandatory and phone number should be atleast ten digit"
+          "All fields are mandatory and phone number should be at least ten digit"
         );
       }
       return;
@@ -470,53 +470,60 @@ const Khatabook = () => {
               <option value="lastdate">pay date</option>
             </select>
           </div>
-          {bkddata.length > 0
-            ? bkddata.map((elm, indx) => {
-                return (
-                  <>
-                    <div className="flexcontainer">
-                      <p key={elm._id}>{elm.name}</p>
-                      <p>{elm.amount}</p>
-                      <div className="flexcontainerbtn">
-                        <button
-                          className="edtpls"
-                          onClick={() =>
-                            updatefrontend(
-                              elm._id,
-                              elm.name,
-                              elm.phone,
-                              elm.gmail,
-                              elm.paydate,
-                              elm.paytype
-                            )
-                          }
-                        >
-                          🖊️
-                        </button>
-                        <button
-                          className="dlt"
-                          onClick={() => deletedata(elm._id)}
-                        >
-                          ⛔
-                        </button>
-                        <button
-                          className="call"
-                          onClick={() => call(elm._id, elm.phone)}
-                        >
-                          📱
-                        </button>
-                      </div>
+          {bkddata.length > 0 &&
+            bkddata.map((elm, indx) => {
+              return (
+                <>
+                  <div className="flexcontainer">
+                    <p key={elm._id}>{elm.name}</p>
+                    <p> {elm.amount} $</p>
+                    <div className="flexcontainerbtn">
+                      <button
+                        className="edtpls"
+                        onClick={() =>
+                          updatefrontend(
+                            elm._id,
+                            elm.name,
+                            elm.phone,
+                            elm.gmail,
+                            elm.paydate,
+                            elm.paytype
+                          )
+                        }
+                      >
+                        🖊️
+                      </button>
+                      <button
+                        className="dlt"
+                        onClick={() => deletedata(elm._id)}
+                      >
+                        ⛔
+                      </button>
+                      <button
+                        className="call"
+                        onClick={() => call(elm._id, elm.phone)}
+                      >
+                        📱
+                      </button>
                     </div>
-                    <div className="flexcontainerdate">
-                      <span className="showdate">{elm.date.slice(0, 10)}</span>
-                      <span className="showdate">
-                        pay date: {elm.paydate.slice(0, 10)}
-                      </span>
-                    </div>
-                  </>
-                );
-              })
-            : ""}{" "}
+                  </div>
+                  <div className="flexcontainerdate">
+                    <span className="showdate">{elm.date.slice(0, 10)}</span>
+                    <span className="showdate">
+                      pay date: {elm.paydate.slice(0, 10)}
+                    </span>
+                  </div>
+                </>
+              );
+            })}
+          {!dataFlag && bkddata.length == 0 && (
+            <div className="flexcontainer ">
+              <h2 className="datanNotification">
+                You have not added any customer, you can add customers using
+                plus icon{" "}
+              </h2>
+            </div>
+          )}
         </>
       )}{" "}
     </div>
